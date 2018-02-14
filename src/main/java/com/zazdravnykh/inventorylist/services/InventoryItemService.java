@@ -22,7 +22,7 @@ public class InventoryItemService {
         InventoryItem item = itemDAO.findOne(id);
 
         if (item == null)
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
 
         return item;
     }
