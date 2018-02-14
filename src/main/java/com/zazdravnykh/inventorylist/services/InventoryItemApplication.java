@@ -1,9 +1,19 @@
 package com.zazdravnykh.inventorylist.services;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.ws.rs.ApplicationPath;
+
+@Component
 @ApplicationPath("/inventory")
-public class InventoryItemApplication extends Application {
+public class InventoryItemApplication extends ResourceConfig {
+
+    @Autowired
+    public InventoryItemApplication() {
+
+        packages("com.zazdravnykh.inventorylist.services");
+    }
 
 }
