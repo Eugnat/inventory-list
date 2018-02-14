@@ -5,8 +5,10 @@ import com.zazdravnykh.inventorylist.entities.InventoryItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 @Component
 @Path("/products")
@@ -27,5 +29,20 @@ public class InventoryItemService {
           //  throw new WebApplicationException(Response.Status.BAD_REQUEST);
 
         return "testString to return";
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces("application/json")
+    public InventoryItem showJsonString(@PathParam("id") int id) {
+
+        InventoryItem item = new InventoryItem();
+        item.setId(id);
+        item.setName("my item");
+        item.setQuantity(50);
+        item.setTrackingNumber("12345");
+        item.setComments("No comments");
+
+        return item;
     }
 }
