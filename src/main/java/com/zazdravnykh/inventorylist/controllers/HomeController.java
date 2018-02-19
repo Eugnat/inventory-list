@@ -49,4 +49,15 @@ public class HomeController {
 
         return "resultPage";
     }
+
+    @GetMapping("/legal")
+    public String showLegal() {
+        return "legal";
+    }
+
+    @GetMapping("/addUser")
+    public String addUser() {
+
+        return "addUser";
+    }
 }

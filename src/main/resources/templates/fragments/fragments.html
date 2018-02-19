@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inventory Management Tool</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row" th:fragment="header">
+        <header class="col-sm-12 text-center font-weight-bold">
+            <h1>INVENTORY MANAGEMENT TOOL</h1>
+        </header>
+    </div>
+    <div class="row" th:fragment="topnavigation">
+        <nav class="col-sm-12 text-center">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a th:href="@{/}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/overview}" class="nav-link">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/addItem}" class="nav-link">Inventory Management</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/addUser}" class="nav-link">User Management</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/legal}" class="nav-link">Legal Information</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row">
+        <nav class="col-sm-2 text-center" th:fragment="sidenavigation">
+            <ul class="nav justify-content-center flex-column">
+                <li class="nav-item">
+                    <a th:href="@{/}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/overview}" class="nav-link">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/addItem}" class="nav-link">Inventory Management</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/addUser}" class="nav-link">User Management</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/legal}" class="nav-link">Legal Information</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="col-sm-10 text-left">
+            <h1>General Information</h1>
+                <p>This website was developed to demonstrate my Java Developer skills. It combines both Spring and Java EE technologies: navigation between pages and forms are processed using Spring mappings,
+                    and all interactions with the underlying database tables are done using Spring Data JPA and JAX-RS. Information about inventory items and users with relevant priviliges is stored in the relevant tables.
+                    Some pages are protected using Spring Security/Java EE technologies.</p>
+                <p>
+                    The following technologies were used to develop the website:
+                </p>
+                <p>
+                <ol>
+                    <li>Java 8</li>
+                    <li>Spring Core</li>
+                    <li>Spring MVC</li>
+                    <li>Spring Data JPA</li>
+                    <li>JAX-RS</li>
+                    <li>Thymeleaf (pages are built using specific fragments like Apache Tiles)</li>
+                    <li>Tomcat</li>
+                    <li>MySQL</li>
+                </ol>
+                </p>
+        </div>
+    </div>
+    <div class="row" th:fragment="footer">
+        <footer class="col-sm-12 text-center">
+            <p>FOOTER</p>
+        </footer>
+    </div>
+</div>
+</body>
+</html>
