@@ -1,6 +1,7 @@
 package com.zazdravnykh.inventorylist.entities;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,14 +19,14 @@ public class InventoryUser {
     private String userPassword;
 
     @Column(name = "user_role")
-    private String userRole;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Role> userRole;
 
     public InventoryUser() {}
 
-    public InventoryUser(String userName, String userPassword, String userRole) {
+    public InventoryUser(String userName, String userPassword) {
         this.userName = userName;
         this.userPassword = userPassword;
-        this.userRole = userRole;
     }
 
     public int getId() {
@@ -52,11 +53,11 @@ public class InventoryUser {
         this.userPassword = userPassword;
     }
 
-    public String getUserRole() {
+    public List<Role> getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(String userRole) {
+    public void setUserRole(List<Role> userRole) {
         this.userRole = userRole;
     }
 
