@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login page</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row" th:replace="fragments/fragments :: header"></div>
+    <div class="row" th:replace="fragments/fragments :: topnavigation"></div>
+    <div class="row">
+        <nav class="col-sm-2 text-center" th:replace="fragments/fragments :: sidenavigation"></nav>
+        <div class="col-sm-10 text-left">
+
+        </div>
+    </div>
+    <div class="row" th:replace="fragments/fragments :: footer"></div>
+</div>
+</body>
+</html>

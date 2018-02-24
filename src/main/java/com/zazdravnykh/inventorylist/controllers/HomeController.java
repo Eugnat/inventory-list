@@ -1,9 +1,9 @@
 package com.zazdravnykh.inventorylist.controllers;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
@@ -22,10 +22,15 @@ public class HomeController {
 
 
     @GetMapping("/legal")
-    public String showLegal(HttpRequest request) {
+    public String showLegal() {
 
 
         return "legal";
+    }
+
+    @PostMapping("/login")
+    public String login(){
+        return "index";
     }
 
 

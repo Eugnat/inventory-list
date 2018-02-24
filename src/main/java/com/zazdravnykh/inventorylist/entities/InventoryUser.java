@@ -1,65 +1,36 @@
 package com.zazdravnykh.inventorylist.entities;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "inventoryuser")
+@Table(name = "inventoryusers")
 public class InventoryUser {
 
     @Id
     @GeneratedValue
     private int id;
 
-    @Column(name = "user_name")
-    private String userName;
+    @Column(name = "username")
+    private String username;
 
-    @Column(name = "user_password")
-    private String userPassword;
+    @Column(name = "password")
+    private String password;
 
-    @Column(name = "user_role")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<Role> userRole;
+    @Column(name="enabled")
+    private boolean enabled;
+
+    @Column(name = "role")
+    private String role;
 
     public InventoryUser() {}
 
     public InventoryUser(String userName, String userPassword) {
-        this.userName = userName;
-        this.userPassword = userPassword;
+        this.username = userName;
+        this.password = userPassword;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public List<Role> getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(List<Role> userRole) {
-        this.userRole = userRole;
-    }
 
     @Override
     public boolean equals(Object o) {

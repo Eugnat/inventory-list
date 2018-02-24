@@ -11,13 +11,13 @@ public class Role {
     @GeneratedValue
     private int id;
 
-    @Column(name = "role_name", unique = true)
-    private String roleName;
+    @Column(name = "role", unique = true)
+    private String role;
 
     public Role() {}
 
     public Role(String roleName) {
-        this.roleName = roleName;
+        this.role = roleName;
     }
 
     public int getId() {
@@ -29,11 +29,11 @@ public class Role {
     }
 
     public String getRoleName() {
-        return roleName;
+        return role;
     }
 
     public void setRoleName(String roleName) {
-        this.roleName = roleName;
+        this.role = roleName;
     }
 
     @Override
