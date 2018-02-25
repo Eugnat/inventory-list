@@ -1,6 +1,7 @@
 package com.zazdravnykh.inventorylist.entities;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -9,6 +10,7 @@ public class InventoryUser {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private int id;
 
     @Column(name = "username")
@@ -21,7 +23,11 @@ public class InventoryUser {
     private boolean enabled;
 
     @Column(name = "role")
-    private String role;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinTable(name = "users_roles",
+               joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> role;
 
     public InventoryUser() {}
 
@@ -30,7 +36,45 @@ public class InventoryUser {
         this.password = userPassword;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public List<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(List<Role> role) {
+        this.role = role;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -9,6 +9,7 @@ public class Role {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private int id;
 
     @Column(name = "role", unique = true)
