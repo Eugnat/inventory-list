@@ -17,7 +17,7 @@
     <div class="row">
         <nav class="col-sm-2 text-center" th:replace="fragments/fragments :: sidenavigation"></nav>
         <div class="col-sm-10 text-left">
-            <h1 class="text-center col-sm-5">ADD NEW USER FORM</h1>
+            <h1 class="text-center col-sm-5">ADD NEW USER FORM (RESTRICTED)</h1>
             <form action="#" th:action="@{/addUser}" th:object="${newUser}" method="post" class="col-sm-5">
                 <div class="form-group">
                     <label for="username">User name: </label>
@@ -34,9 +34,7 @@
                 <div class="form-group">
                     <label for="rolelist">Select role:</label>
                     <select class="form-control" id="rolelist" th:field="*{role}">
-                        <option th:value="'ROLE_ADMIN'">ADMIN</option>
                         <option th:value="'ROLE_USER'">USER</option>
-                        <option th:value="'ROLE_GUEST'">GUEST</option>
                     </select>
                 </div>
                 <div class="form-group">
