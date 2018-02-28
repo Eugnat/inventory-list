@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Component
 @Path("/users")
@@ -15,27 +17,40 @@ public class InventoryUserService {
     private InventoryUserRepository userDAO;
 
     @GET
+    @Produces("application/json")
+    public List<InventoryUser> showAllUsers() {
+
+        List<InventoryUser> userList = userDAO.findAll();
+
+        if (userList != null)
+            return userList;
+        else
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+
+    }
+
+    @GET
     @Path("/{id}")
     @Produces("application/json")
-    public InventoryUser showUserById(@PathParam("id") int id) {
+    public InventoryUser getUserById(@PathParam("id") int id) {
 
         InventoryUser user = userDAO.findOne(id);
 
         if (user != null)
             return user;
         else
-            throw new WebApplicationException("No user with this identifier");
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
     }
 
     @GET
-    @Path("/name/{name}")
-    public InventoryUser showUserByName(@PathParam("name") String name) {
+    @Path("/names/{name}")
+    public InventoryUser getUserByName(@PathParam("name") String name) {
 
         InventoryUser user = userDAO.findByUsername(name);
 
         if (user != null)
             return user;
         else
-            throw new WebApplicationException("No user with this name");
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
     }
 }

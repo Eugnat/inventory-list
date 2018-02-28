@@ -5,10 +5,9 @@ import com.zazdravnykh.inventorylist.entities.InventoryItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Component
 @Path("/products")
@@ -17,32 +16,79 @@ public class InventoryItemService {
     @Autowired
     InventoryItemRepository itemDAO;
 
-
     @GET
-    @Path("{id}")
-    @Produces("text/plain")
-    public String showInventoryItem(@PathParam("id") int id) {
+    @Produces("application/json")
+    public List<InventoryItem> showAllItems() {
 
-        //InventoryItem item = itemDAO.findOne(id);
+        List<InventoryItem> itemList = itemDAO.findAll();
 
-        //if (item == null)
-          //  throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        if (itemList != null)
+            return itemList;
+        else
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
 
-        return "testString to return";
     }
 
     @GET
     @Path("{id}")
     @Produces("application/json")
-    public InventoryItem showJsonString(@PathParam("id") int id) {
+    public InventoryItem showItemById(@PathParam("id") int id) {
 
-        InventoryItem item = new InventoryItem();
-        item.setId(id);
-        item.setName("my item");
-        item.setQuantity(50);
-        item.setTrackingNumber("12345");
-        item.setComments("No comments");
+        InventoryItem item = itemDAO.findOne(id);
 
-        return item;
+        if (item != null)
+            return item;
+        else
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
     }
+
+    @POST
+    @Path("/save")
+    @Consumes("application/json")
+    public Response saveItem(InventoryItem item) {
+
+        InventoryItem savedItem = itemDAO.save(item);
+
+        if (savedItem != null)
+            return Response.status(Response.Status.CREATED).build();
+        else
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+    }
+
+    @DELETE
+    @Path("/delete/{id}")
+    public Response deleteItem(@PathParam("id") int id) {
+
+        itemDAO.delete(id);
+
+        InventoryItem item = itemDAO.findOne(id);
+
+        if (item == null)
+            return Response.status(Response.Status.OK).build();
+        else
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+    }
+
+    @PUT
+    @Path("/update/{id}")
+    public Response updateItem(InventoryItem item, @PathParam("id") int id) {
+
+        InventoryItem existingItem = itemDAO.findOne(id);
+
+        existingItem.setQuantity(item.getQuantity());
+        existingItem.setName(item.getName());
+        existingItem.setTrackingNumber(item.getTrackingNumber());
+        existingItem.setComments(item.getComments());
+
+        InventoryItem updatedItem = itemDAO.save(existingItem);
+
+        if (updatedItem != null)
+            return Response.status(Response.Status.OK).build();
+        else
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+    }
+
+
+
+
 }
