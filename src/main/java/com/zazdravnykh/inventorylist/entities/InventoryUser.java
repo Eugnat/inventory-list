@@ -13,7 +13,7 @@ public class InventoryUser {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "password")
@@ -35,6 +35,7 @@ public class InventoryUser {
         this.username = userName;
         this.password = userPassword;
     }
+
 
     public int getId() {
         return id;

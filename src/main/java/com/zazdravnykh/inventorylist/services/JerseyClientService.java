@@ -2,12 +2,16 @@ package com.zazdravnykh.inventorylist.services;
 
 import com.zazdravnykh.inventorylist.entities.InventoryItem;
 import com.zazdravnykh.inventorylist.entities.InventoryUser;
+import com.zazdravnykh.inventorylist.entities.Role;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Service
@@ -67,40 +71,99 @@ public class JerseyClientService {
         return user;
     }
 
+    public List<InventoryUser> findUsersByRole(String role) {
+
+        List<InventoryUser> userList = client.target(baseUri)
+                .path("inventory/roles/" + role)
+                .request()
+                .accept("application/json")
+                .get(new GenericType<List<InventoryUser>>() {});
+
+        return userList;
+    }
+
     public List<InventoryUser> findAllUsers() {
 
-        List<InventoryUser> list = client.target(baseUri)
-                                        .path("inventory/users/")
+        List<InventoryUser> userList = client.target(baseUri)
+                                        .path("inventory/users")
                                         .request()
                                         .accept("application/json")
                                         .get(new GenericType<List<InventoryUser>>(){});
 
-        return list;
+        return userList;
     }
 
-    public void saveUser(InventoryUser user) {
+    public Response saveUser(InventoryUser user) {
 
-    }
+         Response response = client.target(baseUri)
+                            .path("inventory/users/save")
+                            .request()
+                            .post(Entity.entity(user, MediaType.APPLICATION_JSON_TYPE));
 
-    public void updateUser(InventoryUser user, int id) {
-
-    }
-
-    public void deleteUser(int id) {
-
-
-    }
-
-    public void saveItem(InventoryItem item) {
-
+         return response;
 
     }
 
-    public void updateItem(InventoryItem item, int id) {
+    public Response updateUser(InventoryUser user, int id) {
+
+        Response response = client.target(baseUri)
+                                    .path("inventory/users/update/" + id)
+                                    .request()
+                                    .put(Entity.entity(user, MediaType.APPLICATION_JSON_TYPE));
+
+        return response;
 
     }
 
-    public void deleteItem(int id) {
+    public Response deleteUser(int id) {
 
+        Response response = client.target(baseUri)
+                            .path("inventory/users/delete/" + id)
+                            .request()
+                            .delete();
+
+        return response;
+    }
+
+    public Response saveItem(InventoryItem item) {
+
+        Response response = client.target(baseUri)
+                .path("inventory/products/save")
+                .request()
+                .post(Entity.entity(item, MediaType.APPLICATION_JSON_TYPE));
+
+        return response;
+    }
+
+    public Response updateItem(InventoryItem item, int id) {
+
+        Response response = client.target(baseUri)
+                .path("inventory/products/update/" + id)
+                .request()
+                .put(Entity.entity(item, MediaType.APPLICATION_JSON_TYPE));
+
+        return response;
+    }
+
+    public Response deleteItem(int id) {
+
+        Response response = client.target(baseUri)
+                .path("inventory/products/delete/" + id)
+                .request()
+                .delete();
+
+        return response;
+    }
+
+    public Role findRole(String roleName) {
+
+        Role role = client.target(baseUri)
+                .path("inventory/roles/" + roleName)
+                .request()
+                .accept("application/json")
+                .get(Role.class);
+
+
+        return role;
     }
 }

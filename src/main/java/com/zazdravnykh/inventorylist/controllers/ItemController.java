@@ -1,6 +1,5 @@
 package com.zazdravnykh.inventorylist.controllers;
 
-import com.zazdravnykh.inventorylist.entities.InventoryItem;
 import com.zazdravnykh.inventorylist.services.JerseyClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,20 +27,8 @@ public class ItemController {
     }
 
     @GetMapping("/overview")
-    public String showAll(Model model) {
+    public String showAllItems(Model model) {
 
-        InventoryItem item = client.findItemById(1);
-
-        if (item != null)
-            model.addAttribute("item", item);
-        else
-        {
-            item = new InventoryItem();
-            item.setId(1);
-            item.setName("my name");
-            item.setQuantity(2);
-            model.addAttribute("item", item);
-        }
 
         return "overview";
     }
