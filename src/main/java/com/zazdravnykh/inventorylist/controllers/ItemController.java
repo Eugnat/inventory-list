@@ -1,5 +1,6 @@
 package com.zazdravnykh.inventorylist.controllers;
 
+import com.zazdravnykh.inventorylist.entities.InventoryItem;
 import com.zazdravnykh.inventorylist.services.JerseyClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class ItemController {
@@ -29,6 +32,9 @@ public class ItemController {
     @GetMapping("/overview")
     public String showAllItems(Model model) {
 
+        List<InventoryItem> list = client.findAllItems();
+
+        model.addAttribute("itemList", list);
 
         return "overview";
     }

@@ -18,11 +18,20 @@
         <nav class="col-sm-2 text-center" th:replace="fragments/fragments :: sidenavigation"></nav>
         <div class="col-sm-10 text-left">
             <h1>List of items</h1>
-            <table>
+            <table class="table table-bordered">
                 <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>QUANTITY</th>
+                    <th>TRACKING NUMBER</th>
+                    <th>COMMENTS</th>
+                </tr>
+                <tr th:each="item : ${itemList}">
                     <td th:text="${item.id}"></td>
-                    <td th:text="${item.quantity}"></td>
                     <td th:text="${item.name}"></td>
+                    <td th:text="${item.quantity}"></td>
+                    <td th:text="${item.trackingNumber}"></td>
+                    <td th:text="${item.comments}"></td>
                 </tr>
             </table>
         </div>

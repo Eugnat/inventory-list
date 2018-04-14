@@ -18,6 +18,16 @@
         <nav class="col-sm-2 text-center" th:replace="fragments/fragments :: sidenavigation"></nav>
         <div class="col-sm-10 text-left">
            <h1>List of Users</h1>
+           <table class="table table-bordered">
+               <tr>
+                   <th>ID</th>
+                   <th>NAME</th>
+               </tr>
+               <tr th:each="user : ${userList}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.username}"></td>
+               </tr>
+           </table>
         </div>
     </div>
     <div class="row" th:replace="fragments/fragments :: footer"></div>

@@ -59,8 +59,11 @@ public class UserController {
     }
 
     @GetMapping("/showAllUsers")
-    public String showUsers() {
+    public String showUsers(Model model) {
 
+        List<InventoryUser> list = client.findAllUsers();
+
+        model.addAttribute("userList",list);
 
         return "userManagement";
     }

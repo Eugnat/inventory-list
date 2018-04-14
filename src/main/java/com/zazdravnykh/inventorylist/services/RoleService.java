@@ -18,11 +18,11 @@ public class RoleService {
     RoleRepository roleDAO;
 
     @GET
-    @Path("{name}")
+    @Path("{id}")
     @Produces("application/json")
-    public Role findRoleByName(@PathParam("name") String roleName) {
+    public Role findRoleByName(@PathParam("id") int id) {
 
-        Role role = roleDAO.findByRole(roleName);
+        Role role = roleDAO.findById(id);
 
         return role;
     }
