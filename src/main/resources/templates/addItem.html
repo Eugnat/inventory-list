@@ -18,6 +18,28 @@
         <nav class="col-sm-2 text-center" th:replace="fragments/fragments :: sidenavigation"></nav>
         <div class="col-sm-10 text-left">
             <h1>Inventory Management</h1>
+            <p>Enter the required information and press "Save" to submit values to the database. Please note that the tracking number must be unique to save changes.</p>
+            <form action="#" th:action="@{/addItem}" th:object="${item}" method="post" class="">
+                <div class="form-group">
+                    <label for="itemName">Item name: </label>
+                    <input type="text" th:field="*{name}" class="form-control" id="itemName" />
+                </div>
+                <div class="form-group">
+                    <label for="trackingNumber">Tracking number: </label>
+                    <input type="text" th:field="*{trackingNumber}" class="form-control" id="trackingNumber" />
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity: </label>
+                    <input type="text" th:field="*{quantity}" class="form-control" id="quantity" />
+                </div>
+                <div class="form-group">
+                    <label for="comments">Comments (optional): </label>
+                    <input type="text" th:field="*{comments}" class="form-control" id="comments" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" th:value="Save" />
+                </div>
+            </form>
         </div>
     </div>
     <div class="row" th:replace="fragments/fragments :: footer"></div>

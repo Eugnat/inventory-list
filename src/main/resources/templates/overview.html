@@ -25,6 +25,7 @@
                     <th>QUANTITY</th>
                     <th>TRACKING NUMBER</th>
                     <th>COMMENTS</th>
+                    <th></th>
                 </tr>
                 <tr th:each="item : ${itemList}">
                     <td th:text="${item.id}"></td>
@@ -32,6 +33,16 @@
                     <td th:text="${item.quantity}"></td>
                     <td th:text="${item.trackingNumber}"></td>
                     <td th:text="${item.comments}"></td>
+                    <td>
+                        <form action="#" th:action="@{/deleteItem}" method="get">
+                            <input type="hidden" th:name="id" th:value="${item.id}" />
+                            <input type="submit" value="Delete" />
+                        </form>
+                        <form action="#" th:action="@{/updateItem}" method="get">
+                            <input type="hidden" th:name="id" th:value="${item.id}" />
+                            <input type="submit" value="Update" />
+                        </form>
+                    </td>
                 </tr>
             </table>
         </div>

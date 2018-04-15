@@ -71,6 +71,7 @@ public class InventoryItemService {
 
     @PUT
     @Path("/update/{id}")
+    @Consumes("application/json")
     public Response updateItem(InventoryItem item, @PathParam("id") int id) {
 
         InventoryItem existingItem = itemDAO.findOne(id);
