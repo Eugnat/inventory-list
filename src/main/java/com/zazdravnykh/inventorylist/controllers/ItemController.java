@@ -5,7 +5,10 @@ import com.zazdravnykh.inventorylist.services.JerseyClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -44,6 +47,7 @@ public class ItemController {
         List<InventoryItem> list = client.findAllItems();
 
         model.addAttribute("itemList", list);
+        //model.addAttribute("helperItem", item);
 
         return "overview";
     }
@@ -54,8 +58,8 @@ public class ItemController {
         return "showItem";
     }
 
-    @GetMapping("/deleteItem")
-    public String deleteItem(@RequestParam("id") int id, Model model) {
+    @PostMapping("/deleteItem/{id}")
+    public String deleteItem(@PathVariable("id") int id, Model model) {
 
         Response response = client.deleteItem(id);
 

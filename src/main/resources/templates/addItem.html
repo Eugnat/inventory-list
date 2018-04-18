@@ -19,7 +19,7 @@
         <div class="col-sm-10 text-left">
             <h1>Inventory Management</h1>
             <p>Enter the required information and press "Save" to submit values to the database. Please note that the tracking number must be unique to save changes.</p>
-            <form action="#" th:action="@{/addItem}" th:object="${item}" method="post" class="">
+            <form action="#" th:action="@{/addItem}" th:object="${item}" th:method="post" >
                 <div class="form-group">
                     <label for="itemName">Item name: </label>
                     <input type="text" th:field="*{name}" class="form-control" id="itemName" />

@@ -34,12 +34,10 @@
                     <td th:text="${item.trackingNumber}"></td>
                     <td th:text="${item.comments}"></td>
                     <td>
-                        <form action="#" th:action="@{/deleteItem}" method="get">
-                            <input type="hidden" th:name="id" th:value="${item.id}" />
+                        <form action="#" th:action="@{/deleteItem/{id}(id = ${item.id})}" th:method="post">
                             <input type="submit" value="Delete" />
                         </form>
-                        <form action="#" th:action="@{/updateItem}" method="get">
-                            <input type="hidden" th:name="id" th:value="${item.id}" />
+                        <form action="#" th:action="@{/updateItem/{id}(id = ${item.id})}" th:method="post" >
                             <input type="submit" value="Update" />
                         </form>
                     </td>
