@@ -53,7 +53,11 @@ public class ItemController {
     }
 
     @GetMapping("/showItem/{id}")
-    public String showItem(@PathVariable("id") int id) {
+    public String showItem(@PathVariable("id") int id, Model model) {
+
+        InventoryItem item = client.findItemById(id);
+
+        model.addAttribute("item", item);
 
         return "showItem";
     }
@@ -70,4 +74,29 @@ public class ItemController {
 
         return "resultPage";
     }
+
+    @GetMapping("/updateItem/{id}")
+    public String updateItem(@PathVariable("id") int id, Model model) {
+
+        InventoryItem item = client.findItemById(id);
+
+        model.addAttribute("item", item);
+
+        return "updateItem";
+    }
+
+    @PostMapping("/updateItem/{id}")
+    public String updateItem(@PathVariable("id") int id, @ModelAttribute("item") InventoryItem item, Model model) {
+
+        Response response = client.updateItem(item, id);
+
+        if (response.getStatus() == Response.Status.OK.getStatusCode())
+            model.addAttribute("message", "Item updated successfully with status: " + response.getStatus());
+        else
+            model.addAttribute("message", "Error. Response status: " + response.getStatus());
+
+        return "resultPage";
+    }
+
+
 }

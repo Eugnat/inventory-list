@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Item update</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row" th:replace="fragments/fragments :: header"></div>
+    <div class="row" th:replace="fragments/fragments :: topnavigation"></div>
+    <div class="row">
+        <nav class="col-sm-2 text-center" th:replace="fragments/fragments :: sidenavigation"></nav>
+        <div class="col-sm-10 text-left">
+            <h1>Item update</h1>
+            <p>Update the information and press "Save" to submit values to the database. Please note that the tracking number must be unique to save changes.</p>
+            <form action="#" th:action="@{/updateItem/{id}(id = ${item.id})}" th:object="${item}" th:method="post" >
+                <div class="form-group">
+                    <label for="itemName">Item name: </label>
+                    <input type="text" th:field="*{name}" class="form-control" id="itemName" th:value="${item.name}" />
+                </div>
+                <div class="form-group">
+                    <label for="trackingNumber">Tracking number: </label>
+                    <input type="text" th:field="*{trackingNumber}" class="form-control" id="trackingNumber" th:value="${item.trackingNumber}"/>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity: </label>
+                    <input type="text" th:field="*{quantity}" class="form-control" id="quantity" th:value="${item.quantity}"/>
+                </div>
+                <div class="form-group">
+                    <label for="comments">Comments (optional): </label>
+                    <input type="text" th:field="*{comments}" class="form-control" id="comments" th:value="${item.comments}"/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" th:value="Save" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row" th:replace="fragments/fragments :: footer"></div>
+</div>
+</body>
+</html>

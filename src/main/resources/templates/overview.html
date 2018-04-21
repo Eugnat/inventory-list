@@ -23,21 +23,17 @@
                     <th>ID</th>
                     <th>NAME</th>
                     <th>QUANTITY</th>
-                    <th>TRACKING NUMBER</th>
-                    <th>COMMENTS</th>
                     <th></th>
                 </tr>
                 <tr th:each="item : ${itemList}">
-                    <td th:text="${item.id}"></td>
+                    <td><a th:href="@{/showItem/{id}(id = ${item.id})}" th:text="${item.id}"></a></td>
                     <td th:text="${item.name}"></td>
                     <td th:text="${item.quantity}"></td>
-                    <td th:text="${item.trackingNumber}"></td>
-                    <td th:text="${item.comments}"></td>
                     <td>
                         <form action="#" th:action="@{/deleteItem/{id}(id = ${item.id})}" th:method="post">
                             <input type="submit" value="Delete" />
                         </form>
-                        <form action="#" th:action="@{/updateItem/{id}(id = ${item.id})}" th:method="post" >
+                        <form action="#" th:action="@{/updateItem/{id}(id = ${item.id})}" th:method="get" >
                             <input type="submit" value="Update" />
                         </form>
                     </td>
