@@ -1,7 +1,6 @@
 package com.zazdravnykh.inventorylist.controllers;
 
 import com.zazdravnykh.inventorylist.entities.InventoryUser;
-import com.zazdravnykh.inventorylist.entities.Role;
 import com.zazdravnykh.inventorylist.entities.UserHelper;
 import com.zazdravnykh.inventorylist.services.JerseyClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.ws.rs.core.Response;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -43,17 +41,23 @@ public class UserController {
         InventoryUser newUser = new InventoryUser(user.getName(),user.getPassword());
         newUser.setEnabled(true);
 
-        Role role = client.findRole(user.getRole());
+        int id = 1;
 
-        List<Role> roleList = new ArrayList<>();
-        roleList.add(role);
+        switch (user.getRole()) {
+            case "ROLE_ADMIN" : id = 1;
+                                break;
+            case "ROLE_USER"  : id = 2;
+                                break;
+            case "ROLE_GUEST"  : id = 3;
+                                break;
+        }
 
-        Response response = client.saveUser(newUser);
+        Response response = client.saveUser(newUser, id);
 
         if (response.getStatus() == 201)
-            model.addAttribute("resultLine", "User added successfully");
+            model.addAttribute("message", "User added successfully");
         else
-            model.addAttribute("resultLine", "User not added due to an error");
+            model.addAttribute("message", "User not added due to an error");
 
         return "resultPage";
     }

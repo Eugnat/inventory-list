@@ -13,12 +13,12 @@ public class Role {
     private int id;
 
     @Column(name = "role", unique = true)
-    private String role;
+    private String roleName;
 
     public Role() {}
 
     public Role(String roleName) {
-        this.role = roleName;
+        this.roleName = roleName;
     }
 
     public int getId() {
@@ -30,18 +30,18 @@ public class Role {
     }
 
     public String getRoleName() {
-        return role;
+        return roleName;
     }
 
     public void setRoleName(String roleName) {
-        this.role = roleName;
+        this.roleName = roleName;
     }
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", role='" + role + '\'' +
+                ", role='" + roleName + '\'' +
                 '}';
     }
 

@@ -1,6 +1,7 @@
 package com.zazdravnykh.inventorylist.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,17 +24,20 @@ public class InventoryUser {
     private boolean enabled;
 
     @Column(name = "role")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
                joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> role;
 
-    public InventoryUser() {}
+    public InventoryUser() {
+        this.role = new ArrayList<>();
+    }
 
     public InventoryUser(String userName, String userPassword) {
         this.username = userName;
         this.password = userPassword;
+        this.role = new ArrayList<>();
     }
 
 
@@ -84,6 +88,7 @@ public class InventoryUser {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +
+                ", role=" + role +
                 '}';
     }
 

@@ -93,10 +93,10 @@ public class JerseyClientService {
         return userList;
     }
 
-    public Response saveUser(InventoryUser user) {
+    public Response saveUser(InventoryUser user, int id) {
 
          Response response = client.target(baseUri)
-                            .path("inventory/users/save")
+                            .path("inventory/users/save/" + id)
                             .request()
                             .post(Entity.entity(user, MediaType.APPLICATION_JSON_TYPE));
 
@@ -155,10 +155,10 @@ public class JerseyClientService {
         return response;
     }
 
-    public Role findRole(String roleName) {
+    public Role findRole(int id) {
 
         Role role = client.target(baseUri)
-                .path("inventory/roles/" + roleName)
+                .path("inventory/roles/" + id)
                 .request()
                 .accept("application/json")
                 .get(Role.class);

@@ -1,9 +1,12 @@
 package com.zazdravnykh.inventorylist.services;
 
 import com.zazdravnykh.inventorylist.dao.InventoryUserRepository;
+import com.zazdravnykh.inventorylist.dao.RoleRepository;
 import com.zazdravnykh.inventorylist.entities.InventoryUser;
+import com.zazdravnykh.inventorylist.entities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -15,6 +18,9 @@ public class InventoryUserService {
 
     @Autowired
     private InventoryUserRepository userDAO;
+
+    @Autowired
+    private RoleRepository roleDAO;
 
     @GET
     @Produces("application/json")
@@ -67,13 +73,18 @@ public class InventoryUserService {
     }
 
 
-
+    @Transactional
     @POST
-    @Path("/save")
+    @Path("/save/{id}")
     @Consumes("application/json")
-    public Response saveUser(InventoryUser user) {
+    public Response saveUser(InventoryUser user, @PathParam("id") int id) {
+
+        Role role = roleDAO.findById(id);
+
+        user.getRole().add(role);
 
         InventoryUser savedUser = userDAO.save(user);
+
 
         if (savedUser != null)
             return Response.status(Response.Status.CREATED).build();
